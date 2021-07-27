@@ -1,0 +1,5 @@
+.env
+random_generator.py
+SECRET_KEY.txt
+
+**/__pycache__
