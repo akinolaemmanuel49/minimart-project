@@ -11,4 +11,4 @@ export FLASK_ENV=development
 export FLASK_DEBUG=1
 export SECRET_KEY=secret
 
-flask db init
+flask db init --directory models/migrations

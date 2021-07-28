@@ -1,0 +1,11 @@
+{% extends 'products/base.html' %}
+
+{% block basecss %}
+{% endblock %}
+{% block content %}
+{% for product in products %}
+<span>product.name</span>
+<p>product.category</p>
+<p>product.description</p>
+{% endfor %}
+{% endblock %}
