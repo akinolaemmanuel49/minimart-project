@@ -14,6 +14,7 @@ class Config:
         'DATABASE_URL') or 'sqlite:///' + os.path.join(BASEDIR, 'minimart.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = os.environ.get(
         'SQLALCHEMY_TRACK_MODIFICATIONS')
+    ITEMS_PER_PAGE = os.environ.get('ITEMS_PER_PAGE') or 3
 
 # toprint = Config()
 # print(toprint.SECRET_KEY)
