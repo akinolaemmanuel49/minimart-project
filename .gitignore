@@ -2,4 +2,5 @@
 random_generator.py
 SECRET_KEY.txt
 **/__pycache__
-*.sh
+.vscode/
+.gitignore
