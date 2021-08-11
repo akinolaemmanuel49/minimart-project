@@ -16,3 +16,5 @@ def about_us():
     title = 'Minimart - About us'
     year = datetime.utcnow().year
     return render_template('pages/about_us.html', title=title, year=year)
+
+

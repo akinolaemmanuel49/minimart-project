@@ -20,7 +20,7 @@
             user-select: none;
         }
 
-        @media (min-width: auto) {
+        @media (min-width: 768px) {
             .bd-placeholder-img-lg {
                 font-size: 3.5rem;
             }
@@ -36,6 +36,9 @@
     {% block css %}
     {% endblock %}
 
+    {% block headerjs %}
+    {% endblock %}
+
 </head>
 
 <body>
@@ -48,6 +51,16 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="col auto">
+
+                </div>
+                <form class="d-flex auto">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+                <div class="col auto">
+
+                </div>
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
                     <li class="nav-item"><a class="nav-link" href="#">Products</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Stores</a></li>
@@ -56,10 +69,6 @@
                     <li class="nav-item"><a class="nav-link" href="#">Sign in</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Sign up</a></li>
                 </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
             </div>
         </div>
     </nav>

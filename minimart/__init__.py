@@ -4,14 +4,12 @@ from logging.handlers import RotatingFileHandler, SMTPHandler
 
 from flask import Flask
 from flask_migrate import Migrate
-from flask_moment import Moment
 from flask_sqlalchemy import SQLAlchemy
 
 from minimart.config import Config
 
 db = SQLAlchemy()
 migrate = Migrate()
-
 
 def create_app(config_class=Config):
     app = Flask(__name__)
