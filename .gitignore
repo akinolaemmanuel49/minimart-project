@@ -1,6 +1,9 @@
 .env
-random_generator.py
+randomizers.py
 SECRET_KEY.txt
 **/__pycache__
 .vscode/
 *.sh
+filehandling.py
+templates/products/filehandling_and_description.html
+templates/products/new_base.html
