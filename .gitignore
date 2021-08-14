@@ -1,0 +1,10 @@
+.env
+SECRET_KEY.txt
+**/__pycache__
+.vscode/
+/venv/
+*.sh
+/shelf/
+/workspace.xml
+.idea/
+populate_categories.py
