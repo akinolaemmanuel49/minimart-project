@@ -1,0 +1,35 @@
+{% extends 'auth/base.html' %}
+
+{% block basecss %}
+{% endblock %}
+
+{% block css %}
+<link href="{{ url_for('static', filename='css/signin.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<main class="form-signin">
+    <form>
+        {{ form.hidden_tag() }}
+        <img class="mb-4" src="" alt="logo" width="72" height="57">
+        <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
+
+        <div class="form-floating">
+            <input type="email" class="form-control" id="floatingEmail" placeholder="name@example.com" name="email">
+            <label for="floatingEmail">Email address</label>
+        </div>
+
+        <div class="form-floating">
+            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
+            <label for="floatingPassword">Password</label>
+        </div>
+
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" value="remember-me" name="remember_me"> Remember me
+            </label>
+        </div>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+        <p class="mt-5 mb-3 text-muted">&copy; {{ year }}</p>
+    </form>
+</main>

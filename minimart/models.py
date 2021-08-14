@@ -1,9 +1,9 @@
-from datetime import datetime
 import json
+from datetime import datetime
 
 from flask_login import UserMixin
 
-from minimart import db, bcrypt
+from minimart import bcrypt, db
 
 followers = db.Table(
     'followers',
@@ -17,10 +17,10 @@ class User(UserMixin, db.Model):
     __tablename__ = 'user'
 
     id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(120), nullable=False, blank=False, unique=True, index=True)
-    username = db.Column(db.String(64), nullable=False, blank=False, unique=True, index=True)
-    password = db.Column(db.String(255), nullable=False, blank=False)
-    role = db.Column(db.String(5), nullable=False, blank=False, default='user')
+    email = db.Column(db.String(120), nullable=False, unique=True, index=True)
+    username = db.Column(db.String(64), nullable=False, unique=True, index=True)
+    password = db.Column(db.String(255), nullable=False)
+    role = db.Column(db.String(5), nullable=False, default='user')
     token = db.Column(db.String(32), unique=True, index=True)
     token_expiration = db.Column(db.DateTime)
     products = db.relationship('Product', backref='vendor', lazy='dynamic')
@@ -80,9 +80,10 @@ class Product(db.Model):
     __tablename__ = 'product'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(255), nullable=False, blank=False)
+    name = db.Column(db.String(255), nullable=False)
     description = db.Column(db.Text(), nullable=True)
     category = db.relationship('Category', backref='categories', lazy='dynamic')
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     reviews = db.relationship('ProductReview', backref='product_reviews', lazy='dynamic')
     created = db.Column(db.DateTime, default=datetime.utcnow)
     modified = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
@@ -96,7 +97,18 @@ class Category(db.Model):
     __tablename__ = 'category'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(255), nullable=False, blank=False)
+    name = db.Column(db.String(255), nullable=False)
 
     def __repr__(self):
         return 'Category<{}>'.format(self.name)
+
+
+class ProductReview(db.Model):
+
+    __tablename__ = 'product_review'
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    body = db.Column(db.Text())
+
+
