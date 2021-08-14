@@ -24,7 +24,7 @@ class User(UserMixin, db.Model):
     token = db.Column(db.String(32), unique=True, index=True)
     token_expiration = db.Column(db.DateTime)
     products = db.relationship('Product', backref='vendor', lazy='dynamic')
-    last_seen = db.Column(db.Datetime, default=datetime.utcnow)
+    last_seen = db.Column(db.DateTime, default=datetime.utcnow)
     followed = db.relationship(
         'User',
         secondary=followers,
