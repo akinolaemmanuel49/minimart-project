@@ -10,37 +10,64 @@
 {% block content %}
 <main class="form-signin">
     <form>
-        <img class="mb-4" src="" alt="logo" width="72" height="57">
-        <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
+        <fieldset>
+            <img class="mb-4" src="" alt="logo" width="72" height="57">
+            <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
 
-        <div class="form-floating">
-            <input type="email" class="form-control" id="floatingEmail" placeholder="name@example.com" name="email">
-            <label for="floatingEmail">Email address</label>
-        </div>
+            <div class="form-floating">
+                <input type="email" class="form-control" id="floatingEmail" placeholder="name@example.com" name="email"
+                    class="error" aria-invalid="{{ email_is_invalid }}" aria-describedBy="emailError">
+                <label for="floatingEmail">Email address</label>
+                <span class="errText" id="emailError">{{ email_error }}</span>
+            </div>
 
-        <div class="form-floating">
-            <input type="text" class="form-control" id="floatingUsername" placeholder="name@example.com"
-                name="username">
-            <label for="floatingUsername">Username</label>
-        </div>
+            <div class="form-floating">
+                <input type="text" class="form-control" id="floatingUsername" placeholder="name@example.com"
+                    name="username" class="error" aria-invalid="{{ username_is_invalid }}"
+                    aria-describedBy="usernameError">
+                <label for="floatingUsername">Username</label>
+                <span class="errText" id="usernameError">{{ username_error }}</span>
+            </div>
 
-        <div class="form-floating">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
-            <label for="floatingPassword">Password</label>
-        </div>
+            <div class="form-floating">
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password"
+                    class="error" aria-invalid="{{ password_is_invalid }}" aria-describedBy="passwordError">
+                <label for="floatingPassword">Password</label>
+                <span class="errText" id="passwordError">{{ password_error }}</span>
+            </div>
 
-        <div class="form-floating">
-            <input type="password" class="form-control" id="floatingConfirmPassword" placeholder="Confirm password"
-                name="confirm_password">
-            <label for="floatingConfirmPassword">Confirm password</label>
-        </div>
+            <div class="form-floating">
+                <input type="password" class="form-control" id="floatingConfirmPassword" placeholder="Confirm password"
+                    name="confirm_password" class="error" aria-invalid="{{ confirm_password_is_invalid }}"
+                    aria-describedBy="confirmPasswordError">
+                <label for="floatingConfirmPassword">Confirm password</label>
+                <span class="errText" id="confirmPasswordError">{{ confirm_password_error }}</span>
+            </div>
 
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" value="remember-me" name="remember_me"> Remember me
-            </label>
-        </div>
-        <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-        <p class="mt-5 mb-3 text-muted">&copy; {{ year }}</p>
+            <div class="checkbox mb-3">
+                <label>
+                    <input type="checkbox" value="remember-me" name="remember_me"> Remember me
+                </label>
+            </div>
+
+            <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+            <p class="mt-5 mb-3 text-muted">&copy; {{ year }}</p>
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+        </fieldset>
     </form>
 </main>
+{% endblock %}
+
+<!-- Script for this template -->
+{% block basejs %}
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+{% endblock %}
+
+<!-- Custom script for templates extending this template -->
+{% block js %}
+{% endblock %}
+
+
+</body>
+
+</html>

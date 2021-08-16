@@ -1,18 +1,21 @@
 from datetime import datetime
 
+from flask import current_app as minimart
 from flask import flash, redirect, render_template, request, url_for
-from werkzeug.urls import url_parse
 from flask_login import current_user, login_required, login_user
-from minimart import db, login_manager
+from minimart import csrf
 from minimart.auth import auth
-from minimart.models import User
+from minimart.models import User, db
 from sqlalchemy import exc
+from werkzeug.urls import url_parse
 
 
+@csrf.include
 @auth.route('/signup', methods=['GET', 'POST'])
 def signup():
     title = 'Minimart - Signup'
     year = datetime.utcnow().year
+    email_error, email_is_invalid, username_error, user_is_invalid, password_error, password_is_invalid, confirm_password_error, confirm_password_is_invalid = '', '', '', '', '', '', '', ''
     if current_user.is_authenticated:
         return redirect(url_for('pages.home'))
     if request.method == 'POST':
@@ -28,17 +31,18 @@ def signup():
                 db.session.commit()
             except exc.SQLAlchemyError:
                 return flash('An error occurred. Try again', 'error')
+                word_is_invalid = 'true'
     return render_template('auth/signup.html', title=title, year=year)
 
 
 @auth.route('/signin', methods=['GET', 'POST'])
 def signin():
     title = 'Minimart - Signin'
-    year = datetime.utcnow
+    year = datetime.utcnow().year
     if current_user.is_authenticated:
         return redirect(url_for('pages.home'))
     if request.method is 'POST':
-        user = User.filter_by(email=request.form.get('email')).first()
+        user = User.query.filter_by(email=request.form.get('email')).first()
         if user is None:
             flash('Invalid email address')
             return redirect(url_for('auth.signin'))
@@ -48,4 +52,4 @@ def signin():
             if not next_page or url_parse(next_page).netloc != '':
                 next_page = url_for('pages.home')
             return redirect(next_page)
-        return render_template('auth/signin.html', title=title, year=year)
+    return render_template('auth/signin.html', title=title, year=year)

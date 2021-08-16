@@ -3,7 +3,7 @@ from datetime import datetime
 
 from flask_login import UserMixin
 
-from minimart import bcrypt, db
+from minimart import bcrypt, db, login_manager
 
 followers = db.Table(
     'followers',
@@ -19,7 +19,7 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), nullable=False, unique=True, index=True)
     username = db.Column(db.String(64), nullable=False, unique=True, index=True)
-    password = db.Column(db.String(255), nullable=False)
+    password = db.Column(db.String(32), nullable=False)
     role = db.Column(db.String(5), nullable=False, default='user')
     token = db.Column(db.String(32), unique=True, index=True)
     token_expiration = db.Column(db.DateTime)
@@ -64,6 +64,15 @@ class User(UserMixin, db.Model):
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    query = User.query.filter_by(id=user_id).first()
+    if query:
+        return query
+    else:
+        return None
 
 
 class Cart(db.Model):
