@@ -61,17 +61,21 @@
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
                     <li class="nav-item"><a class="nav-link" href="#">Products</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Stores</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">About us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('pages.about_us') }}">About us</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">API</a></li>
+                    {% if current_user.is_authenticated %}
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.signout') }}">Sign out</a></li>
+                    {% else %}
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.signin') }}">Sign in</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.signup') }}">Sign up</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
     </nav>
 
     {% block content %}
-    
+
     {% endblock %}
 
     <!-- Script for this template -->

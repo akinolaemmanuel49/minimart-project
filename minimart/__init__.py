@@ -1,3 +1,5 @@
+from operator import imod
+from re import I
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
@@ -34,6 +36,9 @@ def create_app(config_class=Config):
 
     from minimart.auth import auth
     app.register_blueprint(auth)
+
+    from minimart.dashboard import dashboard
+    app.register_blueprint(dashboard)
 
     return app
 

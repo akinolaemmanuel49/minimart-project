@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from flask import render_template
-from flask_login import current_user
+from flask_login import current_user, AnonymousUserMixin
 
 from minimart.pages import pages
 
@@ -25,5 +25,8 @@ def about_us():
 def get_current_user():
     title = 'REMOVE LATER'
     year = datetime.utcnow().year
-    username = current_user.username
-    return render_template('pages/get_current_user.html', title=title, year=year, username=username)
+    user = current_user
+    flag = False
+    if isinstance(user, AnonymousUserMixin):
+        flag = True
+    return render_template('pages/get_current_user.html', title=title, year=year, user=user, flag=flag)

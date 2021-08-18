@@ -3,6 +3,7 @@ from datetime import datetime
 from flask import current_app as minimart
 from flask import flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_required, login_user
+from flask_login.utils import logout_user
 from minimart import csrf
 from minimart.auth import auth
 from minimart.models import User, db
@@ -46,6 +47,7 @@ def signup():
     return render_template('auth/signup.html', title=title, year=year)
 
 
+@csrf.include
 @auth.route('/signin', methods=['GET', 'POST'])
 def signin():
     title = 'Minimart - Signin'
@@ -64,3 +66,9 @@ def signin():
                 next_page = url_for('pages.home')
             return redirect(next_page)
     return render_template('auth/signin.html', title=title, year=year)
+
+
+@auth.route('/logout')
+def signout():
+    logout_user()
+    return redirect (url_for('pages.get_current_user'))

@@ -1,0 +1,11 @@
+{% extends 'pages/base.html' %}
+
+{% block basecss %}
+{% endblock %}
+{% block content %}
+{% if flag  %}
+You are not signed in <a href="{{ url_for('auth.signin') }}">click me to sign in</a> or <a href="{{ url_for('auth.signup') }}">click me to sign up</a>.
+{% else %}
+USERNAME:{{ user.username }}
+{% endif %}
+{% endblock %}
