@@ -1,0 +1,12 @@
+{% extends 'products/base.html' %}
+
+{% block basecss %}
+{% endblock %}
+
+{% block content %}
+<ul>
+  {% for category in categories %}
+  <li>{{ category.name }}</li>
+  {% endfor %}
+</ul>
+{% endblock %}

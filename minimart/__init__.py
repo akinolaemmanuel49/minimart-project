@@ -40,6 +40,9 @@ def create_app(config_class=Config):
     from minimart.dashboard import dashboard
     app.register_blueprint(dashboard)
 
+    from minimart.products import products
+    app.register_blueprint(products)
+
     return app
 
 

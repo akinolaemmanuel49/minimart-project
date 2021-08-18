@@ -6,7 +6,7 @@ from flask_login import current_user, login_required, login_user
 from flask_login.utils import logout_user
 from minimart import csrf
 from minimart.auth import auth
-from minimart.models import User, db
+from minimart.models import db, User
 from sqlalchemy import exc
 from werkzeug.urls import url_parse
 
