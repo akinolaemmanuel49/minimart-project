@@ -15,23 +15,34 @@ from werkzeug.urls import url_parse
 def signup():
     title = 'Minimart - Signup'
     year = datetime.utcnow().year
-    email_error, email_is_invalid, username_error, user_is_invalid, password_error, password_is_invalid, confirm_password_error, confirm_password_is_invalid = '', '', '', '', '', '', '', ''
     if current_user.is_authenticated:
         return redirect(url_for('pages.home'))
     if request.method == 'POST':
         email = request.form.get('email')
+        print(email)
         username = request.form.get('username')
+        print(username)
         password = request.form.get('password')
+        print(password)
         confirm_password = request.form.get('confirm_password')
+        print(confirm_password)
+        if len(password) < 8:
+            flash('Password must have atleast 8 characters.', 'error')
+            return redirect(url_for('auth.signup'))
+        if len(password) > 32:
+            flash('Password cannot exceed 32 characters.', 'error')
+            return redirect(url_for('auth.signup'))
         if password == confirm_password:
-            try:
-                user = User(email=email, username=username)
-                user.set_password(password)
-                db.session.add(user)
-                db.session.commit()
-            except exc.SQLAlchemyError:
-                return flash('An error occurred. Try again', 'error')
-                word_is_invalid = 'true'
+            verified_password = password
+        else:
+            flash('Passwords do not match.', 'error')
+            return redirect(url_for('auth.signup'))
+        user = User(email=email, username=username)
+        user.set_password(verified_password)
+        db.session.add(user)
+        db.session.commit()
+        flash('You have successfully signed up', 'message')
+        return redirect(url_for('auth.signin'))
     return render_template('auth/signup.html', title=title, year=year)
 
 
@@ -41,7 +52,7 @@ def signin():
     year = datetime.utcnow().year
     if current_user.is_authenticated:
         return redirect(url_for('pages.home'))
-    if request.method is 'POST':
+    if request.method == 'POST':
         user = User.query.filter_by(email=request.form.get('email')).first()
         if user is None:
             flash('Invalid email address')

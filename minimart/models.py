@@ -23,7 +23,7 @@ class User(UserMixin, db.Model):
     role = db.Column(db.String(5), nullable=False, default='user')
     token = db.Column(db.String(32), unique=True, index=True)
     token_expiration = db.Column(db.DateTime)
-    products = db.relationship('Product', backref='vendor', lazy='dynamic')
+    products = db.relationship('Product')
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
     followed = db.relationship(
         'User',
@@ -80,8 +80,10 @@ class Cart(db.Model):
     __tablename__ = 'cart'
 
     id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(128))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    products = db.relationship('Product', backref='cart_item', lazy='dynamic')
+    product_id = db.Column(db.Integer, db.ForeignKey('product.id'))
+    products = db.relationship('Product')
 
 
 class Product(db.Model):
@@ -91,9 +93,8 @@ class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable=False)
     description = db.Column(db.Text(), nullable=True)
-    category = db.relationship('Category', backref='categories', lazy='dynamic')
+    category = db.Column(db.Integer, db.ForeignKey('category.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    reviews = db.relationship('ProductReview', backref='product_reviews', lazy='dynamic')
     created = db.Column(db.DateTime, default=datetime.utcnow)
     modified = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
@@ -107,6 +108,7 @@ class Category(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable=False)
+    products = db.relationship('Product')
 
     def __repr__(self):
         return 'Category<{}>'.format(self.name)
@@ -118,6 +120,8 @@ class ProductReview(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    product_id = db.Column(db.Integer, db.ForeignKey('product.id'))
+    product = db.relationship('Product')
     body = db.Column(db.Text())
 
 

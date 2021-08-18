@@ -9,51 +9,49 @@
 
 {% block content %}
 <main class="form-signin">
-    <form>
-        <fieldset>
-            <img class="mb-4" src="" alt="logo" width="72" height="57">
-            <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <img class="mb-4" src="" alt="logo" width="72" height="57">
+        <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
 
-            <div class="form-floating">
-                <input type="email" class="form-control" id="floatingEmail" placeholder="name@example.com" name="email"
-                    class="error" aria-invalid="{{ email_is_invalid }}" aria-describedBy="emailError">
-                <label for="floatingEmail">Email address</label>
-                <span class="errText" id="emailError">{{ email_error }}</span>
-            </div>
+        <div class="form-floating">
+            <input type="email" class="form-control" id="floatingEmail" placeholder="name@example.com" name="email"
+                class="error" aria-invalid="{{ email_is_invalid }}" aria-describedBy="emailError">
+            <label for="floatingEmail">Email address</label>
+            <span class="errText" id="emailError">{{ email_error }}</span>
+        </div>
 
-            <div class="form-floating">
-                <input type="text" class="form-control" id="floatingUsername" placeholder="name@example.com"
-                    name="username" class="error" aria-invalid="{{ username_is_invalid }}"
-                    aria-describedBy="usernameError">
-                <label for="floatingUsername">Username</label>
-                <span class="errText" id="usernameError">{{ username_error }}</span>
-            </div>
+        <div class="form-floating">
+            <input type="text" class="form-control" id="floatingUsername" placeholder="name@example.com"
+                name="username" class="error" aria-invalid="{{ username_is_invalid }}"
+                aria-describedBy="usernameError">
+            <label for="floatingUsername">Username</label>
+            <span class="errText" id="usernameError">{{ username_error }}</span>
+        </div>
 
-            <div class="form-floating">
-                <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password"
-                    class="error" aria-invalid="{{ password_is_invalid }}" aria-describedBy="passwordError">
-                <label for="floatingPassword">Password</label>
-                <span class="errText" id="passwordError">{{ password_error }}</span>
-            </div>
+        <div class="form-floating">
+            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password"
+                class="error" aria-invalid="{{ password_is_invalid }}" aria-describedBy="passwordError">
+            <label for="floatingPassword">Password</label>
+            <span class="errText" id="passwordError">{{ password_error }}</span>
+        </div>
 
-            <div class="form-floating">
-                <input type="password" class="form-control" id="floatingConfirmPassword" placeholder="Confirm password"
-                    name="confirm_password" class="error" aria-invalid="{{ confirm_password_is_invalid }}"
-                    aria-describedBy="confirmPasswordError">
-                <label for="floatingConfirmPassword">Confirm password</label>
-                <span class="errText" id="confirmPasswordError">{{ confirm_password_error }}</span>
-            </div>
+        <div class="form-floating">
+            <input type="password" class="form-control" id="floatingConfirmPassword" placeholder="Confirm password"
+                name="confirm_password" class="error" aria-invalid="{{ confirm_password_is_invalid }}"
+                aria-describedBy="confirmPasswordError">
+            <label for="floatingConfirmPassword">Confirm password</label>
+            <span class="errText" id="confirmPasswordError">{{ confirm_password_error }}</span>
+        </div>
 
-            <div class="checkbox mb-3">
-                <label>
-                    <input type="checkbox" value="remember-me" name="remember_me"> Remember me
-                </label>
-            </div>
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" value="remember-me" name="remember_me"> Remember me
+            </label>
+        </div>
 
-            <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-            <p class="mt-5 mb-3 text-muted">&copy; {{ year }}</p>
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
-        </fieldset>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Sign up</button>
+        <p class="mt-5 mb-3 text-muted">&copy; {{ year }}</p>
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
     </form>
 </main>
 {% endblock %}
