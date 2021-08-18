@@ -3,7 +3,11 @@
 {% block basecss %}
 {% endblock %}
 {% block content %}
+<span> {{ product.name }}</span>
+<p>{{ get_category(product.category).name }}</p>
+{% if product.description == None %}
+<p></p>
+{% else %}
+<p>{{ product.description }}</p>
+{% endif %}
 {% endblock %}
-        <span> {{ product.name }}</span>
-        <p>{{ product.category }}</p>
-        <p>{{ product.description }}</p>
