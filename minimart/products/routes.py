@@ -2,6 +2,7 @@ from datetime import datetime
 
 from flask import render_template, redirect, request, current_app, url_for
 from flask_login import login_required, current_user
+from flask_sqlalchemy import Pagination
 from sqlalchemy import exc
 
 from minimart import csrf
@@ -25,9 +26,11 @@ def category_explore(category_name):
     year = datetime.utcnow().year
     page = request.args.get('page', 1, type=int)
     category = Category.query.filter_by(name=category_name).first()
-    products = Product.query.filter_by(category=category.id).order_by(Product.created.desc()).paginate(page, current_app.config['ITEMS_PER_PAGE'], False)
+    products = Product.query.filter_by(category=category.id).order_by(Product.created.desc()).paginate(page, current_app.config['ITEMS_PER_PAGE'], True)
     next_view = url_for('products.category_explore', category_name=category_name, page=products.next_num) if products.has_next else None
     prev_view = url_for('products.category_explore', category_name=category_name, page=products.prev_num) if products.has_prev else None
+    if page == None:
+        return 'ERROR'
     return render_template('products/explore_product_by_category.html', title=title, year=year, products=products.items, next_view=next_view, prev_view=prev_view)
 
 
@@ -36,7 +39,7 @@ def products_list():
     title = 'Minimart - Products'
     year = datetime.utcnow().year
     page = request.args.get('page', 1, type=int)
-    products = Product.query.order_by(Product.created.desc()).paginate(page, current_app.config['ITEMS_PER_PAGE'], False)
+    products = Product.query.order_by(Product.created.desc()).paginate(page, current_app.config['ITEMS_PER_PAGE'], True)
     next_view = url_for('products.products_list', page=products.next_num) if products.has_next else None
     prev_view = url_for('products.products_list', page=products.prev_num) if products.has_prev else None
     return render_template('products/products_list.html', title=title, year=year, products=products.items, next_view=next_view, prev_view=prev_view, get_category=get_category)
