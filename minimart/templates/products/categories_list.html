@@ -6,7 +6,7 @@
 {% block content %}
 <ul>
   {% for category in categories %}
-  <li>{{ category.name }}</li>
+  <li><a href="{{ url_for('products.category_explore', category_name=category_name) }}">{{ category.name }}</a> </li>
   {% endfor %}
 </ul>
 {% endblock %}

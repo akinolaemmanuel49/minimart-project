@@ -1,0 +1,29 @@
+{% extends 'products/base.html' %}
+
+{% block basecss %}
+{% endblock %}
+{% block content %}
+    {% for product in products %}
+        <span> {{ product.name }}</span>
+        <p>{{ get_category(product.category).name }}</p>
+        {% if product.description == None %}
+        <p></p>
+        {% else %}
+        <p>{{ product.description }}</p>
+        {% endif %}
+    {% endfor %}
+    <nav aria-label="...">
+        <ul class="pager">
+            <li class="previous{% if not prev_view %} disabled{% endif %}">
+                <a href="{{ prev_view or '#' }}">
+                    <span aria-hidden="true">&larr;</span>Newer posts
+                </a>
+            </li>
+            <li class="next{% if not next_view %} disabled{% endif %}">
+                <a href="{{ next_view or '#' }}">
+                    Older posts<span aria-hidden="true">&rarr;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+{% endblock %}
