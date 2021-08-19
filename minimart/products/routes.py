@@ -29,8 +29,6 @@ def category_explore(category_name):
     products = Product.query.filter_by(category=category.id).order_by(Product.created.desc()).paginate(page, current_app.config['ITEMS_PER_PAGE'], True)
     next_view = url_for('products.category_explore', category_name=category_name, page=products.next_num) if products.has_next else None
     prev_view = url_for('products.category_explore', category_name=category_name, page=products.prev_num) if products.has_prev else None
-    if page == None:
-        return 'ERROR'
     return render_template('products/explore_product_by_category.html', title=title, year=year, products=products.items, next_view=next_view, prev_view=prev_view)
 
 
