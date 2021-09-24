@@ -1,4 +1,10 @@
-.wrapper {
+.parent {
     display: flex;
-    grid-template-rows: auto;
+    flex-wrap: wrap;
+}
+
+.child {
+    flex: 1 0 25%;
+    margin: 5px;
+    height: 200px;
 }
