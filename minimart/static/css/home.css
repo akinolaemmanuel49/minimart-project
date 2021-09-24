@@ -6,5 +6,5 @@
 .child {
     flex: 1 0 25%;
     margin: 5px;
-    height: 200px;
+    height: auto;
 }
