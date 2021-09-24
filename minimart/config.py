@@ -11,6 +11,7 @@ class Config:
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'sqlite:///' + os.path.join(BASEDIR, 'minimart.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = os.environ.get(
         'SQLALCHEMY_TRACK_MODIFICATIONS') or True
-    ITEMS_PER_PAGE = os.environ.get('ITEMS_PER_PAGE') or 3
+    ITEMS_PER_PAGE = os.environ.get('ITEMS_PER_PAGE') or 5
     MAX_CONTENT_LENGTH = os.environ.get('MAX_CONTENT_LENGTH') or 5120 * 5120
-    UPLOAD_EXTENSIONS = os.environ.get('UPLOAD_EXTENSIONS') or ['.jpg', '.png', '.gif', '.jpeg']
+    UPLOAD_EXTENSIONS = os.environ.get('UPLOAD_EXTENSIONS') or ['.jpg', '.png', '.jpeg']
+    IMAGE_UPLOADS = os.environ.get('IMAGE_UPLOADS') or '/home/bit/Documents/Spaces/PySpace/FlaskProjects/revival/minimart-project/minimart/public/images'

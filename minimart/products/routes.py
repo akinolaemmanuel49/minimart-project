@@ -1,3 +1,4 @@
+import os
 from datetime import datetime
 
 from flask import render_template, redirect, request, current_app, url_for
@@ -60,8 +61,11 @@ def add_product():
     if request.method == 'POST':
         product_name = request.form.get('product_name')
         product_category = request.form.get('product_category')
+        if request.files:
+            image = request.files["product_image"]
+            image.save(os.path.join(current_app.config['IMAGE_UPLOADS'], image.filename))
+            print("IMAGE SAVED")
         category = Category.query.filter_by(name=product_category).first()
-        print(category)
         if category:
             product = Product(name=product_name)
             db.session.add(product)

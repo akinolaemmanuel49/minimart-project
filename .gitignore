@@ -1,4 +1,3 @@
-.env
 SECRET_KEY.txt
 **/__pycache__
 .vscode/
@@ -8,3 +7,4 @@ SECRET_KEY.txt
 /workspace.xml
 .idea/
 populate_categories.py
+.env
