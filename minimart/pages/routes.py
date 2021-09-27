@@ -20,7 +20,8 @@ def home():
     products = Product.query.order_by(Product.created.desc()).paginate(page, current_app.config['ITEMS_PER_PAGE'], True)
     next_view = url_for('pages.home', page=products.next_num) if products.has_next else None
     prev_view = url_for('pages.home', page=products.prev_num) if products.has_prev else None
-    return render_template('pages/home.html', title=title, year=year, products=products.items, next_view=next_view, prev_view=prev_view, get_category=get_category)
+    products = products.items
+    return render_template('pages/home.html', title=title, year=year, products=products, next_view=next_view, prev_view=prev_view, get_category=get_category)
 
 
 @pages.route('/about-us', methods=['GET'])

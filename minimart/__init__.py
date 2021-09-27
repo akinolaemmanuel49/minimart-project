@@ -41,6 +41,9 @@ def create_app(config_class=Config):
     from minimart.products import products
     app.register_blueprint(products)
 
+    from minimart.categories import categories
+    app.register_blueprint(categories)
+
     return app
 
 

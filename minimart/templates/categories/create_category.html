@@ -1,0 +1,28 @@
+{% block basecss %}
+{% endblock %}
+
+{% block css %}
+<link href="{{ url_for('static', filename='css/create_category.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="form-container">
+  <form method="POST" enctype="multipart/form-data">
+    <div class="mb-3">
+      <label for="categoryName" class="form-label">Category name</label>
+      <input type="text" class="form-control" id="categoryName" placeholder="Enter the name of the category"
+        name="category_name">
+    </div>
+    <div class="mb-3">
+      <label for="categoryName" class="form-label">Category description</label>
+      <input type="text" class="form-control" id="categoryDescription" placeholder="Write a short description of the category"
+        name="category_description">
+    </div>
+    
+    <div class="mb-3 submitButton">
+      <button class="btn btn-primary" type="submit">Add product</button>
+    </div>
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+  </form>
+</div>
+{% endblock %}

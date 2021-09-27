@@ -8,3 +8,9 @@
     margin: 5px;
     height: auto;
 }
+
+.product-image {
+    object-fit: cover;
+    max-height: 200px;
+    width: 100%;
+}
