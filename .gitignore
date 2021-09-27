@@ -8,3 +8,5 @@ SECRET_KEY.txt
 .idea/
 populate_categories.py
 .env
+minimart.code-workspace
+**/public
