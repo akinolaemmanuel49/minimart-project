@@ -68,7 +68,7 @@ def signin():
     return render_template('auth/signin.html', title=title, year=year)
 
 
-@auth.route('/logout')
+@auth.route('/signout')
 def signout():
     logout_user()
     return redirect (url_for('pages.get_current_user'))
