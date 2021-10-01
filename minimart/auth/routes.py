@@ -20,11 +20,8 @@ def signup():
         return redirect(url_for('pages.home'))
     if request.method == 'POST':
         email = request.form.get('email')
-        print(email)
         username = request.form.get('username')
-        print(username)
         password = request.form.get('password')
-        print(password)
         confirm_password = request.form.get('confirm_password')
         print(confirm_password)
         if len(password) < 8:
@@ -71,4 +68,4 @@ def signin():
 @auth.route('/signout')
 def signout():
     logout_user()
-    return redirect (url_for('pages.get_current_user'))
+    return redirect (url_for('pages.home'))
