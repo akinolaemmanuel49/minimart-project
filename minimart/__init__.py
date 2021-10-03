@@ -4,6 +4,7 @@ from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
 from flask_seasurf import SeaSurf
 from flask_migrate import Migrate
+from flask_mail import Mail
 
 from minimart.config import Config
 
@@ -14,6 +15,7 @@ login_manager.login_message = 'You need to be signed in to view this page.'
 bcrypt = Bcrypt()
 csrf = SeaSurf()
 migrate = Migrate()
+mail = Mail()
 
 def create_app(config_class=Config):
     app = Flask(__name__)
@@ -28,6 +30,9 @@ def create_app(config_class=Config):
     db.init_app(app)
 
     migrate.init_app(app, db)
+
+    from minimart.models import mail
+    mail.init_app(app)
 
     from minimart.pages import pages
     app.register_blueprint(pages)
