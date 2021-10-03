@@ -15,24 +15,24 @@
 
         <div class="form-floating">
             <input type="email" class="form-control" id="floatingEmail" placeholder="name@example.com" name="email"
-                class="error" aria-invalid="{{ email_is_invalid }}" aria-describedBy="emailError">
+                class="error" aria-invalid="{{ email_is_invalid }}" aria-describedBy="emailError" value="{{ email }}">
             <label for="floatingEmail">Email address</label>
-            <span class="errText" id="emailError">{{ email_error }}</span>
+            <span class="errText" id="emailError">{{ error_message }}</span>
         </div>
 
         <div class="form-floating">
             <input type="text" class="form-control" id="floatingUsername" placeholder="name@example.com"
                 name="username" class="error" aria-invalid="{{ username_is_invalid }}"
-                aria-describedBy="usernameError">
+                aria-describedBy="usernameError" value="{{ username }}">
             <label for="floatingUsername">Username</label>
-            <span class="errText" id="usernameError">{{ username_error }}</span>
+            <span class="errText" id="usernameError">{{ error_message }}</span>
         </div>
 
         <div class="form-floating">
             <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password"
                 class="error" aria-invalid="{{ password_is_invalid }}" aria-describedBy="passwordError">
             <label for="floatingPassword">Password</label>
-            <span class="errText" id="passwordError">{{ password_error }}</span>
+            <span class="errText" id="passwordError">{{ error_message }}</span>
         </div>
 
         <div class="form-floating">
@@ -40,7 +40,7 @@
                 name="confirm_password" class="error" aria-invalid="{{ confirm_password_is_invalid }}"
                 aria-describedBy="confirmPasswordError">
             <label for="floatingConfirmPassword">Confirm password</label>
-            <span class="errText" id="confirmPasswordError">{{ confirm_password_error }}</span>
+            <span class="errText" id="confirmPasswordError">{{ error_message }}</span>
         </div>
 
         <div class="checkbox mb-3">
