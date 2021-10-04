@@ -10,3 +10,4 @@ populate_categories.py
 .env
 minimart.code-workspace
 **/public
+*.log
