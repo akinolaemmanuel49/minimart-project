@@ -21,3 +21,21 @@ class Config:
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD') or 'b1t3at3r'
     MAIL_USE_TLS = os.environ.get('MAIL_USE_TLS') or True
     MAIL_USE_SSL = os.environ.get('MAIL_USE_SSL') or False
+
+
+class TestingConfig(Config):
+    FLASK_DEBUG = os.environ.get('FLASK_DEBUG') or True
+    FLASK_ENV = os.environ.get('FLASK_ENV') or 'development'
+    TESTING = os.environ.get('TESTING') or True
+    PRESERVE_CONTEXT_ON_EXCEPTION = os.environ.get('PRESERVE_CONTEXT_ON_EXCEPTION') or False
+
+
+class DevelopmentConfig(Config):
+    FLASK_DEBUG = os.environ.get('FLASK_DEBUG') or True
+    FLASK_ENV = os.environ.get('FLASK_ENV') or 'development'
+    TESTING = os.environ.get('TESTING') or False
+
+
+class ProductionConfig(Config):
+    FLASK_DEBUG = os.environ.get('FLASK_DEBUG') or False
+    TESTING = os.environ.get('TESTING') or False

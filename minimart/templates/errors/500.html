@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="errorPageTitle"><span>Internal Server Error (500)</span></h1>
+<div class="errorPageSection">
+    <h4>An unexpected error has occured!</h4>
+    <h4><a href="{{ url_for('pages.home') }}">Homepage</a></h4>
+</div>
+{% endblock %}
